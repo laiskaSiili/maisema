@@ -1,8 +1,10 @@
 import os
 
 from django.conf import settings
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
+
 
 class HomeView(View):
     def get(self, request):
@@ -36,3 +38,14 @@ class BrowserView(View):
                 'path': settings.PATH_SEPERATOR.join(partial_path)
             })
         return render(request, 'maisema/home.html', ctx)
+
+
+    def post(self, request, path):
+        file = request.FILES['file']
+        file_fullpath = request.POST['path']
+        #with open(os.path.join(settings.BROWSER_ROOT, file._name), 'wb') as f:
+        #    f.write(file.read())
+        return JsonResponse({
+            'file': file._name,
+            'file_fullpath': file_fullpath
+            })

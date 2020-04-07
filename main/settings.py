@@ -111,5 +111,5 @@ STATIC_URL = '/static/'
 ##################
 # Maisema specific
 ##################
-BROWSER_ROOT = BASE_DIR #os.path.join(BASE_DIR, 'projectroot')
+BROWSER_ROOT = os.path.join(BASE_DIR, 'projectroot')
 PATH_SEPERATOR = '&|&'

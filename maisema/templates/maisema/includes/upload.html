@@ -1,0 +1,29 @@
+{% load static %}
+
+<h3>Choose Folder</h3>
+<div class="picker"><input type="file" id="picker" name="fileList" onclick="this.value=null;" webkitdirectory mozdirectory multiple></div>
+
+<!-- upload progress modal -->
+<!-- Modal -->
+<div class="modal fade" id="upload-progress-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Uploading...</h5>
+        </div>
+        <div class="modal-body">
+
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+        <hr>
+        <div class="file-state-container">
+        </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-close-btn btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>

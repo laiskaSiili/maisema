@@ -7,6 +7,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- File browser -->
 <link href="{% static 'maisema/css/filebrowser.css' %}" rel="stylesheet">
+<!-- Upload CSS -->
+<link href="{% static 'maisema/css/upload.css' %}" rel="stylesheet">
 {% endblock %}
 
 
@@ -16,11 +18,15 @@
 <script src="{% static 'maisema/js/table.js'%}"></script>
 <!-- Home js -->
 <script src="{% static 'maisema/js/home_controller.js'%}"></script>
-<!-- File upload -->
+<!-- Upload js -->
+<script src="{% static 'maisema/js/upload.js'%}"></script>
 {% endblock %}
 
 
 {% block content %}
+
+{% include 'maisema/includes/upload.html' %}
+
 <h1>File browser</h1>
 
 <div class="m-2">
