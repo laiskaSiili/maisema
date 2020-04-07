@@ -5,6 +5,8 @@
 {% block css %}
 <!-- Materialize CSS -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- File browser -->
+<link href="{% static 'maisema/css/filebrowser.css' %}" rel="stylesheet">
 {% endblock %}
 
 
@@ -19,6 +21,23 @@
 
 
 {% block content %}
-<h1>Hi there</h1>
+<h1>File browser</h1>
+
+<div class="m-2">
+    {% for breadcrumb in breadcrumbs %}
+    > <a href="{{breadcrumb.path}}">{{breadcrumb.name}}</a>
+    {% endfor %}
+</div>
+<div>
+    <ul>
+        {% for folder in folders %}
+        <li class="d-flex align-items-center"><i class="mr-1 material-icons">folder</i><a href="{{folder.path}}">{{folder.name}}</a></li>
+        {% endfor %}
+
+        {% for file in files %}
+        <li class="d-flex align-items-center"><i class="mr-1 material-icons">text_format</i>{{file.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
 
 {% endblock %}
