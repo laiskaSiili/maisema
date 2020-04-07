@@ -1,0 +1,24 @@
+{% extends 'maisema/base.html' %}
+{% load static %}
+
+
+{% block css %}
+<!-- Materialize CSS -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock %}
+
+
+{% block js %}
+<!-- Datatables -->
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'maisema/js/table.js'%}"></script>
+<!-- Home js -->
+<script src="{% static 'maisema/js/home_controller.js'%}"></script>
+<!-- File upload -->
+{% endblock %}
+
+
+{% block content %}
+<h1>Hi there</h1>
+
+{% endblock %}
