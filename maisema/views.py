@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from django.conf import settings
 from django.http import JsonResponse
@@ -8,12 +9,12 @@ from django.views import View
 
 class HomeView(View):
     def get(self, request):
-        return redirect('browser', path='root')
+        return redirect('browser', url_path='root')
 
 class BrowserView(View):
-    def get(self, request, path):
+    def get(self, request, url_path):
         ctx = {}
-        path_parts = path.split(settings.PATH_SEPERATOR)
+        path_parts = url_path.split(settings.PATH_SEPERATOR)
         sys_path = os.path.join(settings.BROWSER_ROOT, *path_parts[1:]) #ignore root
         all_content = sorted(os.listdir(sys_path))
         ctx['files'] = []
@@ -26,7 +27,7 @@ class BrowserView(View):
             else:
                 ctx['folders'].append({
                     'name': f,
-                    'path': settings.PATH_SEPERATOR.join([path, f])
+                    'url_path': settings.PATH_SEPERATOR.join([url_path, f])
                 })
         # Create breadcrumbs
         ctx['breadcrumbs'] = []
@@ -35,17 +36,27 @@ class BrowserView(View):
             partial_path.append(part)
             ctx['breadcrumbs'].append({
                 'name': part,
-                'path': settings.PATH_SEPERATOR.join(partial_path)
+                'url_path': settings.PATH_SEPERATOR.join(partial_path)
             })
         return render(request, 'maisema/home.html', ctx)
 
 
-    def post(self, request, path):
+    def post(self, request, url_path):
+        path_parts = url_path.split(settings.PATH_SEPERATOR)
+        sys_path = os.path.join(settings.BROWSER_ROOT, *path_parts[1:]) #ignore root
+
         file = request.FILES['file']
         file_fullpath = request.POST['path']
-        #with open(os.path.join(settings.BROWSER_ROOT, file._name), 'wb') as f:
-        #    f.write(file.read())
+
+        rel_directory = os.path.dirname(file_fullpath)
+        abs_directory = os.path.join(sys_path, rel_directory)
+        Path(abs_directory).mkdir(exist_ok=True, parents=True)
+        abs_file = os.path.join(abs_directory, file._name)
+        with open(abs_file, 'wb') as f:
+            f.write(file.read())
+
         return JsonResponse({
             'file': file._name,
-            'file_fullpath': file_fullpath
+            'file_fullpath': file_fullpath,
+            'written_to': abs_file
             })

@@ -31,13 +31,13 @@
 
 <div class="m-2">
     {% for breadcrumb in breadcrumbs %}
-    > <a href="{{breadcrumb.path}}">{{breadcrumb.name}}</a>
+    > <a href="{{breadcrumb.url_path}}">{{breadcrumb.name}}</a>
     {% endfor %}
 </div>
 <div>
     <ul>
         {% for folder in folders %}
-        <li class="d-flex align-items-center"><i class="mr-1 material-icons">folder_open</i><a href="{{folder.path}}">{{folder.name}}</a></li>
+        <li class="d-flex align-items-center"><i class="mr-1 material-icons">folder_open</i><a href="{{folder.url_path}}">{{folder.name}}</a></li>
         {% endfor %}
 
         {% for file in files %}
