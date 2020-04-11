@@ -4,13 +4,18 @@ from pathlib import Path
 from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
 from django.views import View
+
+from maisema.decorator import sanitize_url_path
 
 
 class HomeView(View):
     def get(self, request):
         return redirect('browser', url_path='root')
 
+
+@method_decorator(sanitize_url_path, name='dispatch')
 class BrowserView(View):
     def get(self, request, url_path):
         ctx = {}
