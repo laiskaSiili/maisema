@@ -46,9 +46,9 @@ class BrowserView(View):
         sys_path = os.path.join(settings.BROWSER_ROOT, *path_parts[1:]) #ignore root
 
         file = request.FILES['file']
-        file_fullpath = request.POST['path']
+        file_relpath = request.POST['path']
 
-        rel_directory = os.path.dirname(file_fullpath)
+        rel_directory = os.path.dirname(file_relpath)
         abs_directory = os.path.join(sys_path, rel_directory)
         Path(abs_directory).mkdir(exist_ok=True, parents=True)
         abs_file = os.path.join(abs_directory, file._name)
@@ -57,6 +57,6 @@ class BrowserView(View):
 
         return JsonResponse({
             'file': file._name,
-            'file_fullpath': file_fullpath,
+            'file_relpath': file_relpath,
             'written_to': abs_file
             })
