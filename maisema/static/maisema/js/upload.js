@@ -109,7 +109,7 @@ class UploadProgressModal {
                     // Request successfully processed
                     console.log('SUCCES')
                     console.log(request.response);
-                    this.addFileStateSuccess(request.response.file_fullpath);
+                    this.addFileStateSuccess(request.response.file_relpath);
                 } else {
                     console.log('ERROR');
                     this.addFileStateError('Oh no, something went wrong!', `Status code: ${request.status} | Error message: ${request.statusText}`)
