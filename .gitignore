@@ -1,4 +1,7 @@
 .vscode
 *.pyc
 *.sqlite3
-projectroot
+browserroot/*
+!browserroot/.gitkeep
+static/*
+!static/.gitkeep

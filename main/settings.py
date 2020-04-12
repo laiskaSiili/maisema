@@ -122,6 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 ##################
 # Logging
@@ -158,5 +159,5 @@ logging.config.dictConfig({
 ##################
 # Maisema specific
 ##################
-BROWSER_ROOT = os.path.join(BASE_DIR, 'projectroot')
+BROWSER_ROOT = os.path.join(BASE_DIR, 'browserroot')
 PATH_SEPERATOR = '&|&'
